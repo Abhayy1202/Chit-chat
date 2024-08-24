@@ -1,0 +1,30 @@
+{
+  "name": "chatbot_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/anthropic": "^0.2.15",
+    "@langchain/community": "^0.2.31",
+    "@langchain/google-genai": "^0.0.26",
+    "@supabase/supabase-js": "^2.45.2",
+    "axios": "^1.7.5",
+    "base64-img": "^1.0.4",
+    "body-parser": "^1.20.2",
+    "chromadb": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "fs": "^0.0.1-security",
+    "langchain": "^0.2.17",
+    "multer": "^1.4.5-lts.1",
+    "pdf-parse": "^1.1.1",
+    "pdf-parser": "^1.0.5"
+  }
+}
