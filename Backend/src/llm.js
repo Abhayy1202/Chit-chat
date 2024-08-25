@@ -2,7 +2,7 @@ import fs from "fs";
 import pdfParse from "pdf-parse";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { createClient } from "@supabase/supabase-js";
-import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
+import { OpenAIEmbeddings } from "@langchain/openai";
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 
 export const parsePDF = async (query) => {
@@ -25,7 +25,7 @@ export const parsePDF = async (query) => {
     // Retrieve environment variables
     const sbApiKey = process.env.SUPABASE_API_KEY;
     const sbUrl = process.env.SUPABASE_URL_LC_CHATBOT;
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.OPENAI_API_KEY;
 
     // Validate environment variables
     if (!sbApiKey || !sbUrl || !apiKey) {
@@ -38,19 +38,21 @@ export const parsePDF = async (query) => {
     // Create a SupabaseVectorStore
     await SupabaseVectorStore.fromDocuments(
       chunks,
-      new GoogleGenerativeAIEmbeddings({ apiKey }),
+      new OpenAIEmbeddings({ apiKey }),
       {
         client,
         tableName: "documents",
-        queryName: 'match-documents'
+        queryName: "match-documents",
       }
     );
 
     
 
         // Perform the similarity search
-    const queryEmbedding = await new GoogleGenerativeAIEmbeddings({ apiKey }).embedQuery(query);
-    const results = await vectorStore.search(queryEmbedding);
+    const queryEmbedding = await new OpenAIEmbeddings({ apiKey }).embedQuery(
+      query
+    );
+    const results = await SupabaseVectorStore.search(queryEmbedding);
 
     // Prepare the response
     const response = results.map(result => result.document).join("\n");
