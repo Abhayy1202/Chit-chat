@@ -104,11 +104,12 @@
 }
 
 .details-form {
-  background: white;
+  background: #909090;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: 300px;
+  color:white
 }
 
 .details-form h2 {
@@ -123,7 +124,10 @@
 .details-form input {
   width: 92%;
   padding: 8px;
+  border-radius: 8px;
   margin-top: 5px;
+  background-color: #2a2828;
+  color: white
 }
 
 .close-button {
