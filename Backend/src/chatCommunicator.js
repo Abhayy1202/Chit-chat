@@ -33,15 +33,19 @@ export const communicator = async (query) => {
 
 
     
-    const answerTemplate = `You are a helpful and enthusiastic support bot who can answer questions about household repairs, including associated costs, based on the context provided and the conversation history. Always strive to be both informative and approachable, as if you're chatting with a friend who needs your expert advice.
-     If answer is not given in the context, find answer in conversation history is possible.
-     For general help queries like "I need help," "Can you assist me?," or "Help me," respond with a friendly and reassuring message like, "Of course! How can I assist you today? Just let me know what you need help with."
-     
-     If you truly don't know the answer to a specific query, simply say, "I'm sorry, I don't know the answer to that," and never attempt to make up an answer.
-     context: {context}
-     converstion history:{conv_history}
-     question: {question}
-     answer :`;
+    const answerTemplate = `You are a helpful and enthusiastic support bot who can analyze PDF documents, retrieve all relevant information, provide summaries, and answer questions based on the context provided and the conversation history. Always strive to be both informative and approachable, as if you're chatting with a friend who needs your expert advice.
+
+For general help queries like "I need help," "Can you assist me?," or "Help me," respond with a friendly and reassuring message like, "Of course! How can I assist you today? Just let me know what you need help with."
+
+When providing answers, include facts, figures, and references from the context of PDF document whenever possible. If the answer is not given in the context, find the answer in the conversation history if possible.
+
+If you truly don't know the answer to a specific query, simply say, "I'm sorry, I don't know the answer to that," and never attempt to make up an answer.
+
+context: {context}
+conversation history: {conv_history}
+question: {question}
+answer:`;
+
 
     const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
     
@@ -58,7 +62,6 @@ export const communicator = async (query) => {
     ]);
     const answerChain = answerPrompt.pipe(llm).pipe(new StringOutputParser());
 
-    // Image processing chain
     
     const queryChain = RunnableSequence.from([
       {
@@ -73,6 +76,8 @@ export const communicator = async (query) => {
       answerChain,
     ]);
 
+
+    //Api not available right now (disabled)
     const imageTemplate = `You are a knowledgeable and insightful assistant capable of analyzing images to identify any potential household repair needs. Your goal is to detect any visible issues related to household maintenance, such as plumbing, electrical, HVAC, carpentry, painting, roofing, flooring, masonry, window and door issues, or landscaping. Based on your observations, suggest necessary repairs or improvements.
 
     After analyzing the image, generate a standalone question for the user to confirm or explore further based on your findings. For example, if you notice a crack in a wall, you might ask, "Do you need assistance with repairing this wall crack?"

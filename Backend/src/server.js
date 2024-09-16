@@ -4,6 +4,12 @@ import { communicator } from "./chatCommunicator.js";
 import multer from "multer";
 import axios from "axios";
 import base64Img from "base64-img";
+import { parsePDF } from "./pdfParser.js";
+import PdfParse from "pdf-parse";
+import path from "path";
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+
 // var base64Img = require("base64-img");
 
 const app = express();
@@ -19,6 +25,50 @@ app.use(express.json({ limit: "16kb" }));
 app.post("/clear", async (req, res) => {
   await communicator('clear-chat');
   res.status(200).json({ message:"chat-cleared" });
+});
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+const assetsDirectory = path.join(__dirname, '../assets');  // Path to the 'assets' folder
+if (!fs.existsSync(assetsDirectory)) {
+  fs.mkdirSync(assetsDirectory, { recursive: true });  // Creates the folder if it doesn't exist
+}
+
+// Configure Multer storage
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, assetsDirectory);  // Use the created or existing 'assets' folder
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); 
+    console.log("1@"+file.originalname) // Unique filename
+  },
+});
+
+
+const upload = multer({storage});
+// Endpoint to handle file upload
+app.post('/upload', upload.single('file'), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+   try {
+    
+    await parsePDF(req.file.filename);
+    
+    // const response=await communicator("get-greeting");
+     res.json({
+       message: "File uploaded successfully",
+       filename: req.file.filename,
+      //  data:response 
+     });
+   } catch (error) {
+     console.error("Error processing PDF:", error);
+     res.status(500).json({ error: "PDF upload failed" });
+   }
+  
 });
 
 app.post("/chat-bot", async (req, res) => {
@@ -38,10 +88,10 @@ app.post("/quotation", async (req, res) => {
     if (!name || !email) {
       return res.status(400).json({ error: "Name and email are required." });
     }
-
-    // const { data, error } = await supabase
-    //   .from("user_details")
-    //   .insert([{ name, email, phone, address }]);
+    else{
+      // const response=await communicator("")
+    }
+   
 
     if (error) throw error;
 
@@ -56,7 +106,6 @@ app.post("/quotation", async (req, res) => {
 
 //Image process Route
 
-const upload = multer();
 app.post("/process-image", upload.single("image"), async (req, res) => {
   
   try {

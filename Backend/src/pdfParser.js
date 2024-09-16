@@ -8,11 +8,11 @@ import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 dotenv.config({ path: "../.env" });
 
-export const parsePDF = async (query) => {
+export const parsePDF = async (filename) => {
   try {
     // Read the PDF file
-    const pdfBuffer = fs.readFileSync("../assets/SCDATA.pdf");
-
+    const pdfBuffer = fs.readFileSync(`./assets/${filename}`);
+   
     // Parse the PDF content
     const pdfData = await pdfParse(pdfBuffer);
     const rawText = pdfData.text;

@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import getAnalytics from './AnalyticReport.js';
 
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />

@@ -3,13 +3,12 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #665f5f;
+
 }
 
 .chat-container {
-  width: 400px;
+  width: 500px;
   max-width: 100%;
-  background: #B8C4BB;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -22,6 +21,7 @@
   padding: 10px;
   overflow-y: auto;
   border-bottom: 1px solid #ddd;
+  min-height: 200px;
 }
 
 .message {
@@ -31,12 +31,20 @@
 }
 
 .message.user {
-  background-color: #f1f1f1;
-  text-align: right;
+  background-color: rgb(159, 159, 159);
+  width:fit-content;
+  margin-left:auto;
+  text-align: left;
+  border-radius: 20px;
+    border-bottom-right-radius: 0px;
 }
 
 .message.assistant {
-  background-color: #e1e1e1;
+  background-color: #491bc7;
+    color: rgb(226 232 240);
+    margin-right: 30%;
+  border-radius: 20px;
+    border-bottom-left-radius: 0px;
 }
 
 .input-container {
@@ -49,7 +57,9 @@
   flex: 1;
   padding: 10px;
   border: 1px solid #ddd;
+  color: rgb(195, 200, 207);
   border-radius: 5px;
+  background-color: #222734;
 }
 
 .input-container button {
@@ -69,14 +79,18 @@
 .upload-button {
   cursor: pointer;
     display: inline-block;
+    color:white;
     border-radius: 50%;
+    margin:3px 5px;
     padding: 8px;
+    padding-left:10px ;
     /* Adjust padding to control the size of the blue circle */
     transition: background-color 0.3s ease;
 }
 
 .upload-button svg {
   transition: fill 0.3s ease, stroke 0.3s ease;
+    
 }
 
 .upload-button:hover {
@@ -104,7 +118,6 @@
 }
 
 .details-form {
-  background: #909090;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -119,6 +132,7 @@
 .details-form label {
   display: block;
   margin-bottom: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 .details-form input {
@@ -126,14 +140,16 @@
   padding: 8px;
   border-radius: 8px;
   margin-top: 5px;
-  background-color: #2a2828;
-  color: white
+  background-color: #797979;
+  color: black
 }
 
 .close-button {
   background-color: #dc3545;
+  margin: 10px 4px;
+  max-width: max-content;
   color: white;
-  padding: 8px 16px;
+  padding: 8px 19px;
   border: none;
   border-radius: 5px;
   font-size: 14px;
