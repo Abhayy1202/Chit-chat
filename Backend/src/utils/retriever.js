@@ -2,7 +2,7 @@ import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase"
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { createClient } from "@supabase/supabase-js";
 import dotenv from "dotenv";
-dotenv.config({ path: "../../.env" });
+dotenv.config();
 
 const ApiKey = process.env.GOOGLE_API_KEY;
 const embeddings = new GoogleGenerativeAIEmbeddings({ApiKey})

@@ -9,6 +9,8 @@ import PdfParse from "pdf-parse";
 import path from "path";
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import dotenv from "dotenv";
+dotenv.config();
 
 // var base64Img = require("base64-img");
 
@@ -43,7 +45,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname)); 
-    console.log("1@"+file.originalname) // Unique filename
+    // console.log("1@"+file.originalname) // Unique filenamen
   },
 });
 

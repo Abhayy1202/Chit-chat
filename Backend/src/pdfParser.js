@@ -6,7 +6,7 @@ import { createClient } from "@supabase/supabase-js";
 // import { OpenAIEmbeddings } from "@langchain/openai";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
-dotenv.config({ path: "../.env" });
+dotenv.config();
 
 export const parsePDF = async (filename) => {
   try {
