@@ -72,7 +72,8 @@ app.post('/upload', upload.single('file'), async (req, res) => {
    }
   
 });
-app.post("/hello",async(req,res)=>{
+
+app.post("/",async(req,res)=>{
 
   return res.status(200).json({data:"HELLO from genie"})
 })

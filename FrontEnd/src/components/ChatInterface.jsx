@@ -55,7 +55,7 @@ export const ChatInterface = ({
                 />
               </div>
             )}
-            {msg.content && !msg.image && <p>{msg.content}</p>}
+            {msg.content && !msg.image && <p dangerouslySetInnerHTML={{ __html: msg.content }}/>}
           </div>
         ))}
         {loading && (

@@ -13,7 +13,7 @@ export const NewChatButton = ({ setFile ,handlePDF }) => {
     if (selectedFile && selectedFile.type === "application/pdf") {
       setFile(selectedFile);
       console.log("File selected:", selectedFile.name);
-      await handlePDF();
+      // await handlePDF();
     } else {
       console.error("Please select a PDF file");
      

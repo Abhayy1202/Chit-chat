@@ -124,6 +124,11 @@ function App() {
 
        assistantMessage = response.data.data;
 
+       assistantMessage = assistantMessage
+         .replace(/\n/g, "<br>")
+         .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+
        // If "quotation" is in the message, show form
        if (input.includes("quotation" || "quotations")) {
          setShowDetailsForm(true);
