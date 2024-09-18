@@ -72,6 +72,10 @@ app.post('/upload', upload.single('file'), async (req, res) => {
    }
   
 });
+app.post("/hello",async(req,res)=>{
+
+  return res.status(200).json({data:"HELLO from genie"})
+})
 
 app.post("/chat-bot", async (req, res) => {
   const { query } = req.body;
